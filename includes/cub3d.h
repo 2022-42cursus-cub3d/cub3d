@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/10 19:00:20 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/10 22:00:24 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ t_info	*info(void);
 ** parse.c
 */
 t_bool	is_parse_err(int argc, char **argv);
-t_bool	init_parse(void);
+t_bool	save_map(char *str);
+
+/*
+** parse_utils.c
+*/
+void	max_num(size_t *max, size_t num);
+t_bool	map_open(char *str);
 
 #endif
