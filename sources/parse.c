@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 20:19:40 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/10 19:05:09 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/10 19:56:28 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_bool	init_parse(void)
 
 	len = 0;
 	max = 0;
-	while (-1 != get_next_line(info()->parse.fd, &line))
+	while (0 < get_next_line(info()->parse.fd, &line))
 	{
 		len++;
 		if (max < ft_strlen(line))
