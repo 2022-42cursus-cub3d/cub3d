@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/06 20:29:35 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/10 19:00:20 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
 # include "../libft_gnl/libft.h"
 # include "../libft_gnl/get_next_line/get_next_line.h"
 # include "../minilibx_opengl_20191021/mlx.h"
@@ -37,25 +38,40 @@ typedef enum e_bool
 
 typedef struct s_pos
 {
-	int	x;
-	int	y;
-}		t_pos;
+	int			x;
+	int			y;
+}	t_pos;
 
 typedef struct s_xpm
 {
-	int		wid;
-	int		hei;
-	void	*img;
-}			t_xpm;
+	int			wid;
+	int			hei;
+	void		*img;
+}	t_xpm;
+
+typedef struct s_rgb
+{
+	int			red;
+	int			green;
+	int			blue;
+}	t_rgb;
 
 typedef struct s_xpmImgs
 {
-	t_xpm	wall;
-	t_xpm	btm;
-	t_xpm	plyr;
-	t_xpm	clt;
-	t_xpm	exit;
-}			t_xpmImgs;
+	t_xpm		north;
+	t_xpm		south;
+	t_xpm		west;
+	t_xpm		east;
+}	t_xpmImgs;
+
+typedef struct s_parse
+{
+	int			fd;
+	t_xpmImgs	imgs;
+	t_rgb		f_rgb;
+	t_rgb		c_rgb;
+	int			maxLen;
+}	t_parse;
 
 typedef struct s_info
 {
@@ -65,12 +81,12 @@ typedef struct s_info
 
 	int			wid;
 	int			hei;
+
+	t_parse		parse;
 	char		**map;
 
-	int			steps;
-	t_xpmImgs	imgs;
 	t_pos		pos;
-}			t_info;
+}	t_info;
 
 /*
 ** utils.c
@@ -80,6 +96,7 @@ t_info	*info(void);
 /*
 ** parse.c
 */
-t_bool is_parse_err(int argc, char **argv);
+t_bool	is_parse_err(int argc, char **argv);
+t_bool	init_parse(void);
 
 #endif
