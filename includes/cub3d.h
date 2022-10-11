@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/10 22:00:24 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/11 18:43:22 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_rgb
 
 typedef struct s_xpmImgs
 {
+	int			num;
 	t_xpm		north;
 	t_xpm		south;
 	t_xpm		west;
@@ -73,16 +74,26 @@ typedef struct s_parse
 	int			maxLen;
 }	t_parse;
 
-typedef struct s_info
+typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
 	void		*img;
 
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+}	t_data;
+
+typedef struct s_info
+{
+	t_data		data;
 	int			wid;
 	int			hei;
 
 	t_parse		parse;
+	t_list		*list;
 	char		**map;
 
 	t_pos		pos;
@@ -97,7 +108,6 @@ t_info	*info(void);
 ** parse.c
 */
 t_bool	is_parse_err(int argc, char **argv);
-t_bool	save_map(char *str);
 
 /*
 ** parse_utils.c

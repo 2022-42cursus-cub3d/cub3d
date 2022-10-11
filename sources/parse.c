@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 20:19:40 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/10 22:04:33 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/11 18:55:53 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,43 +38,72 @@ description file with the .cub extension!\n", tmp));
 	return (save_map(argv[1]));
 }
 
-static	t_bool init_parse(char *str)
+t_bool	chk_map_arg(char *str)
 {
-	int		idx;
+	char	*type;
 
-	idx = 0;
-	if (FALSE == map_open(str))
-		return (FALSE);
-	while (idx < info()->hei)
-		get_next_line(info()->parse.fd, &(info()->map[idx++]));
+	type = ft_substr(str, 0, 2);
+	if (0 == info()->parse.imgs.num)
+	{
+		if (ft_strncmp("NO", type, 2))
+			return (parse_err("순서 에러", type));
+		free(type);
+		type = ft_substr(str, 2, ft_strlen(str) - 2);
+		info()->parse.imgs.north.img = mlx_xpm_file_to_image(info()->data.mlx
+			, type, &(info()->parse.imgs.north.wid), &(info()->parse.imgs.north.hei));
+	}
+	else if (1 == info()->parse.imgs.num)
+	{
+		if (ft_strncmp("SO", type, 2))
+			return (parse_err("순서 에러", type));
+		free(type);
+		type = ft_substr(str, 2, ft_strlen(str) - 2);
+		info()->parse.imgs.south.img = mlx_xpm_file_to_image(info()->data.mlx
+			, type, &(info()->parse.imgs.south.wid), &(info()->parse.imgs.south.hei));
+		free(type);
+		info()->parse.imgs.num++;
+		
+	}
+	else if (2 == info()->parse.imgs.num)
+	{
+		if (ft_strncmp("WE", type, 2))
+			return (parse_err("순서 에러", type));
+		free(type);
+		type = ft_substr(str, 2, ft_strlen(str) - 2);
+		info()->parse.imgs.west.img = mlx_xpm_file_to_image(info()->data.mlx
+			, type, &(info()->parse.imgs.west.wid), &(info()->parse.imgs.west.hei));
+		free(type);
+		info()->parse.imgs.num++;
+	}
+	else if (3 == info()->parse.imgs.num)
+	{
+		if (ft_strncmp("EA", type, 2))
+			return (parse_err("순서 에러", type));
+		free(type);
+		type = ft_substr(str, 2, ft_strlen(str) - 2);
+		info()->parse.imgs.east.img = mlx_xpm_file_to_image(info()->data.mlx
+			, type, &(info()->parse.imgs.east.wid), &(info()->parse.imgs.east.hei));
+		free(type);
+		info()->parse.imgs.num++;	
+	}
+	free(type);
+	info()->parse.imgs.num++;
+	return (TRUE);
 }
 
 t_bool	save_map(char *str)
 {
-	int		len;
-	size_t	max;
-	char	*line;
+	char *str;
 
-	len = 0;
-	max = 0;
-	line = 0;
-	while (0 < get_next_line(info()->parse.fd, &line))
+	str = 0;
+	while (0 < get_next_line(info()->parse.fd, &str))
 	{
-		len++;
-		max_num(&max, ft_strlen(line));
-		free(line);
+		if (0 == ft_strlen(str))
+			free(str);
+		else if (FALSE == chk_map_arg(str))
+		{
+			free(str);
+			return (FALSE);
+		}
 	}
-	if (line)
-	{
-		len++;
-		max_num(&max, ft_strlen(line));
-		free(line);
-	}
-	close(info()->parse.fd);
-	info()->hei = len;
-	info()->map = (char **)malloc(sizeof(char *) * (len + 1));
-	if (0 != info()->map)
-		return (parse_err("malloc error", 0));
-	info()->map[len] = 0;
-	return (init_parse(str));
 }
