@@ -6,11 +6,16 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:14:14 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/11 15:16:12 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/11 17:10:10 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./test.h"
+
+void leaks(void)
+{
+	system("leaks test");
+}
 
 t_data *data(void) {
 	static t_data data;
@@ -43,8 +48,9 @@ void my_mlx_pixel_put(int x, int y, int color)
 
 int game_over(void)
 {
-	mlx_destroy_image(data()->mlx, data()->img);
-	mlx_destroy_window(data()->mlx, data()->win);
+	// mlx_destroy_image(data()->mlx, data()->img); // 없어도 누수 발생하지 않음
+	mlx_destroy_window(data()->mlx, data()->win); // 없어도 누수 발생하지 않음
+	// atexit(leaks);
 	exit(0);
 	return (0);
 }

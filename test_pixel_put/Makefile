@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/11 14:20:29 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/11 17:10:23 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ $(NAME) : $(OBJS) ../minilibx_opengl_20191021/libmlx.a
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 clean:
-	$(MAKE) -C ../minilibx_opengl_20191021 clean
 	rm -f $(OBJS)
 
 fclean: clean
+	$(MAKE) -C ../minilibx_opengl_20191021 clean
 	rm -f $(NAME)
 
 re: fclean all
