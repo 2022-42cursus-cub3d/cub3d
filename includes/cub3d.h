@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/11 18:43:22 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/11 23:32:17 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
+# include <string.h>
+# include <errno.h>
 # include "../libft_gnl/libft.h"
 # include "../libft_gnl/get_next_line/get_next_line.h"
 # include "../minilibx_opengl_20191021/mlx.h"
@@ -112,6 +114,7 @@ t_bool	is_parse_err(int argc, char **argv);
 /*
 ** parse_utils.c
 */
+t_bool	parse_err(char *err_msg, char *malloc_str);
 void	max_num(size_t *max, size_t num);
 t_bool	map_open(char *str);
 

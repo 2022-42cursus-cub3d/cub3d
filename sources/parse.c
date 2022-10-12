@@ -6,19 +6,11 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 20:19:40 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/11 18:55:53 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/11 23:32:09 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-static t_bool	parse_err(char *err_msg, char *malloc_str)
-{
-	if (0 != malloc_str)
-		free(malloc_str);
-	printf("Error\n%s\n", err_msg);
-	return (FALSE);
-}
 
 t_bool	is_parse_err(int argc, char **argv)
 {
