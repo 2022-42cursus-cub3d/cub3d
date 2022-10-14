@@ -1,7 +1,7 @@
-NO ../xpm/wall.xpm
-SO ../xpm/clt.xpm
-WE ../xpm/gift.xpm
-EA ../xpm/bottom.xpm
+NO ./xpm/wall.xpm
+SO ./xpm/clt.xpm
+WE ./xpm/gift.xpm
+EA ./xpm/bottom.xpm
 
 F 220,100,0
 C 225,30,0

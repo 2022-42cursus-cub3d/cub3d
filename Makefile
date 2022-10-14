@@ -6,12 +6,13 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/14 17:24:29 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/14 18:50:14 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror
 MAKE = make
 NAME = cub3d
 MLX = -I./minilibx_opengl_20191021 -L./minilibx_opengl_20191021 -lmlx

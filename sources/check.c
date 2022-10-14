@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:40:54 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/14 18:19:36 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/14 18:54:13 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	find_type(char *line)
 	int			idx;
 
 	idx = 0;
-	while (ids[idx])
+	while (idx < 6)
 	{
 		if (!ft_strncmp(ids[idx], line, 2))
 			return (idx);
@@ -132,7 +132,7 @@ void	save_rgb(t_map *map, int tidx, char *str)
 	while (split[idx])
 		free(split[idx++]);
 	free(split);
-	if (idx != 4)
+	if (idx != 3)
 		error("R, G, B colors in range [0, 255].", str - 2);
 	rgb->rgb = (rgb->rgbs[0] << 16) + (rgb->rgbs[1] << 8) + rgb->rgbs[2];
 }
@@ -160,7 +160,9 @@ void	get_map_arg(t_info *info)
 			else if (idx < 4)
 				save_img(info, idx, line + 3);
 			else if ((idx == 4 || idx == 5))
-				save_rgb(info, idx, line + 2);
+				save_rgb(map, idx, line + 2);
+			if (idx == 5) // 천장 정보까지 다 읽었으면 gnl을 멈춰야함(이제부터 content 읽기)
+				break ;
 		}
 		free(line);
 	}
