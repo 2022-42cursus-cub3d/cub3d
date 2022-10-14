@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/11 14:10:22 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/14 17:24:29 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_GNL = -I./libft_gnl -I./libft_gnl/get_next_line -L./libft_gnl -lft_gnl
 INC = -I./includes
 FRAMEWORK = -framework OpenGL -framework Appkit
 SRC = ./sources
-SRCS = ${SRC}/main.c ${SRC}/utils.c ${SRC}/parse.c
+SRCS = ${SRC}/main.c ${SRC}/check.c ${SRC}/error.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME) 
@@ -38,11 +38,11 @@ $(NAME) : $(OBJS) ./libft_gnl/libft_gnl.a ./minilibx_opengl_20191021/libmlx.a
 
 clean:
 	$(MAKE) -C ./libft_gnl clean
-	$(MAKE) -C ./minilibx_opengl_20191021 clean
 	rm -f $(OBJS)
 
 fclean: clean
 	$(MAKE) -C ./libft_gnl fclean
+	$(MAKE) -C ./minilibx_opengl_20191021 clean
 	rm -f $(NAME)
 
 re: fclean all

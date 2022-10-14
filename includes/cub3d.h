@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/11 23:32:17 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/14 17:18:49 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 # include <string.h>
 # include <errno.h>
+# include <stdbool.h>
 # include "../libft_gnl/libft.h"
 # include "../libft_gnl/get_next_line/get_next_line.h"
 # include "../minilibx_opengl_20191021/mlx.h"
@@ -32,11 +33,38 @@
 # define KEY_LEFT			123
 # define KEY_RIGHT			124
 
-typedef enum e_bool
+typedef struct	s_img
 {
-	TRUE = 0,
-	FALSE
-}	t_bool;
+	void	*img;
+	int		wid;
+	int		hei;
+
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct	s_rgb
+{
+	int		rgbs[3];
+	int		rgb;
+}	t_rgb;
+
+typedef struct s_map
+{
+	int		fd;
+	int		wid;
+	int		hei;
+	int		flags;
+
+	t_img	imgs[4];
+	t_rgb	floor;
+	t_rgb	ceiling;
+
+	t_list	*list;
+	char	**map;
+}	t_map;
 
 typedef struct s_pos
 {
@@ -44,78 +72,42 @@ typedef struct s_pos
 	int			y;
 }	t_pos;
 
-typedef struct s_xpm
-{
-	int			wid;
-	int			hei;
-	void		*img;
-}	t_xpm;
-
-typedef struct s_rgb
-{
-	int			red;
-	int			green;
-	int			blue;
-}	t_rgb;
-
-typedef struct s_xpmImgs
-{
-	int			num;
-	t_xpm		north;
-	t_xpm		south;
-	t_xpm		west;
-	t_xpm		east;
-}	t_xpmImgs;
-
-typedef struct s_parse
-{
-	int			fd;
-	t_xpmImgs	imgs;
-	t_rgb		f_rgb;
-	t_rgb		c_rgb;
-	int			maxLen;
-}	t_parse;
-
-typedef struct s_data
-{
-	void		*mlx;
-	void		*win;
-	void		*img;
-
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-}	t_data;
-
 typedef struct s_info
 {
-	t_data		data;
-	int			wid;
-	int			hei;
+	void	*mlx;
+	void	*win;
 
-	t_parse		parse;
-	t_list		*list;
-	char		**map;
-
-	t_pos		pos;
+	t_map	map;
+	t_pos	pos;
 }	t_info;
 
 /*
-** utils.c
+** error.c
 */
-t_info	*info(void);
+void	error(char *err_msg, char *alloc_str);
 
 /*
-** parse.c
+** 
 */
-t_bool	is_parse_err(int argc, char **argv);
+void	chk_arg(int ac, char **av);
+void	chk_file(t_map *map, char *av);
+void	get_map_arg(t_info *info);
 
-/*
-** parse_utils.c
-*/
-t_bool	parse_err(char *err_msg, char *malloc_str);
-void	max_num(size_t *max, size_t num);
-t_bool	map_open(char *str);
+// /*
+// ** utils.c
+// */
+// t_info	*info(void);
+
+// /*
+// ** parse.c
+// */
+// bool	is_parse_err(int argc, char **argv);
+
+// /*
+// ** parse_utils.c
+// */
+// bool	parse_err(char *err_msg, char *malloc_str);
+// void	max_num(size_t *max, size_t num);
+// bool	map_open(char *str);
 
 #endif
