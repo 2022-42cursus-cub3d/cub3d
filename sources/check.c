@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:40:54 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/14 17:23:51 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/14 18:19:36 by wonkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	chk_file(t_map *map, char *av)
 {
 	map->fd = open(av, O_RDONLY);
 	if (map->fd < 0)
-		error(strerror(errno), 0);	
+		error(strerror(errno), 0);
 }
 
 bool	is_empty_type(t_map *map)
@@ -111,7 +111,7 @@ void	save_rgb(t_map *map, int tidx, char *str)
 	t_rgb	*rgb;
 	char	**split;
 	int		idx;
-	
+
 	idx = 0;
 	rgb = &(map->floor);
 	if (tidx == 5)
@@ -153,15 +153,16 @@ void	get_map_arg(t_info *info)
 			continue ;
 		}
 		idx = find_type(line);
-		if (-1 == idx)
-			error("Map error", line);
-		else if (4 > idx)
-			save_img(info, idx, line + 3);
-		else
-			save_rgb(map, idx, line + 2);
+		if (idx < 6)
+		{
+			if (idx < 0)
+				error("Map error", line);
+			else if (idx < 4)
+				save_img(info, idx, line + 3);
+			else if ((idx == 4 || idx == 5))
+				save_rgb(info, idx, line + 2);
+		}
 		free(line);
-		if (idx == 5)
-			break ;
 	}
 	if (false == is_filled_all(map))
 		error("Lack of map information", 0);
