@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:40:54 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/16 14:55:31 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/16 15:46:43 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,6 @@ void	chk_file(t_map *map, char *av)
 	if (map->fd < 0)
 		error(strerror(errno), 0);
 }
-
-// bool	is_empty_type(t_map *map)
-// {
-// 	int	idx;
-
-// 	idx = 0;
-// 	while (idx < 4)
-// 	{
-// 		if (NULL != map->imgs[idx].img)
-// 			return (false);
-// 		idx++;
-// 	}
-// 	if (-1 != map->floor.rgb || -1 != map->ceiling.rgb)
-// 		return (false);
-// 	return (true);
-// }
-
-// bool	is_filled_all(t_map *map)
-// {
-// 	int	idx;
-
-// 	idx = 0;
-// 	while (idx < 4)
-// 	{
-// 		if (NULL == map->imgs[idx].img)
-// 			return (false);
-// 		idx++;
-// 	}
-// 	if (-1 == map->floor.rgb || -1 == map->ceiling.rgb)
-// 		return (false);
-// 	return (true);
-// }
 
 int	find_type(char *line)
 {
@@ -78,10 +46,6 @@ void	save_img(t_info *info, int idx, char *path)
 	t_img	*simg;
 
 	simg = &(info->map.imgs[idx]);
-	// if ((0 == idx && false == is_empty_type(&(info->map))))
-	// 	error("Type identifiers must be followed a strict order.", path - 3);
-	// if (0 <= idx - 1 && NULL == info->map.imgs[idx - 1].img)
-	// 	error("Type identifiers must be followed a strict order.", path - 3);
 	if (NULL != simg->img)
 		error("Type information is duplicated.", path - 3);
 	simg->img = mlx_xpm_file_to_image(info->mlx, path, &(simg->wid)
@@ -117,8 +81,6 @@ void	save_rgb(t_map *map, int tidx, char *str)
 	rgb = &(map->floor);
 	if (tidx == 5)
 		rgb = &(map->ceiling);
-	// if (-1 != rgb->rgb)
-	// 	error("Type information is duplicated.", str - 2);
 	split = ft_split(str, ',');
 	while (split[idx])
 	{
@@ -176,6 +138,4 @@ void	get_map_arg(t_info *info)
 		}
 		free(line);
 	}
-	// if (false == is_filled_all(map))
-	// 	error("Lack of map information", 0);
 }
