@@ -6,11 +6,16 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:32:09 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/14 18:51:12 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/16 13:53:01 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	leaks(void)
+{
+	system("leaks cub3d");
+}
 
 int	main(int argc, char **argv)
 {
@@ -23,5 +28,7 @@ int	main(int argc, char **argv)
 	chk_arg(argc, argv);
 	chk_file(&(info.map), argv[1]);
 	get_map_arg(&info);
+	close(info.map.fd);
+	// atexit(leaks);
 	return (0);
 }

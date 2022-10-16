@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/14 17:18:49 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/16 13:51:24 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,17 @@ typedef struct s_info
 void	error(char *err_msg, char *alloc_str);
 
 /*
-** 
+** check.c
 */
 void	chk_arg(int ac, char **av);
 void	chk_file(t_map *map, char *av);
 void	get_map_arg(t_info *info);
+
+/*
+** main.c
+*/
+void	leaks(void);
+
 
 // /*
 // ** utils.c
