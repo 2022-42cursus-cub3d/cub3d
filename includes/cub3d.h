@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/16 17:16:19 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 01:04:46 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,13 @@ void	leaks(void);
 */
 void	save_map_to_list(t_info *info);
 void	find_map_size(t_map *map);
+void	save_map(t_map *map);
+void	print_map(t_map *map);
+
+/*
+** free.c
+*/
+void	free_malloc(char **str, int num);
 
 
 // /*

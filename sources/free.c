@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 19:32:09 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 01:13:12 by hyojlee          ###   ########.fr       */
+/*   Created: 2022/10/17 00:55:03 by hyojlee           #+#    #+#             */
+/*   Updated: 2022/10/17 00:56:36 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	leaks(void)
+void	free_malloc(char **str, int num)
 {
-	system("leaks cub3d");
-}
+	int	idx;
 
-int	main(int argc, char **argv)
-{
-	t_info	info;
-
-	ft_bzero(&(info), sizeof(t_info));
-	info.map.floor.rgb = -1;
-	info.map.ceiling.rgb = -1;
-	info.mlx = mlx_init();
-	chk_arg(argc, argv);
-	chk_file(&(info.map), argv[1]);
-	get_map_arg(&info);
-	save_map_to_list(&info);
-	find_map_size(&(info.map));
-	save_map(&(info.map));
-	close(info.map.fd);
-	// atexit(leaks);
-	return (0);
+	idx = 0;
+	while (idx < num)
+		free(str[idx++]);
+	free(str);
 }

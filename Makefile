@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/16 16:25:52 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/17 01:04:15 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,11 @@ LIBFT_GNL = -I./libft_gnl -I./libft_gnl/get_next_line -L./libft_gnl -lft_gnl
 INC = -I./includes
 FRAMEWORK = -framework OpenGL -framework Appkit
 SRC = ./sources
-SRCS = ${SRC}/main.c ${SRC}/check.c ${SRC}/error.c ${SRC}/map.c
+SRCS = ${SRC}/main.c	\
+		${SRC}/check.c	\
+		${SRC}/error.c	\
+		${SRC}/map.c	\
+		${SRC}/free.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME) 

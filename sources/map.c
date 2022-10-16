@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:01:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/16 17:20:40 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 01:22:03 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,58 @@ void	find_map_size(t_map *map)
 		map->hei++;
 	}
 	printf("%d %d\n", map->wid, map->hei);
+}
+
+void	save_map(t_map *map)
+{
+	int		idx;
+	size_t	cpy_num;
+	t_list	*cur;
+
+	idx = 0;
+	map->map = (char **)malloc(sizeof(char *) * (map->hei + 1));
+	if (0 == map->map)
+	{
+		ft_lstclear(&(map->list), free_content);
+		error(strerror(errno), 0);
+	}
+	map->map[map->hei] = 0;
+	cur = map->list;
+	while (idx < map->hei)
+	{
+		map->map[idx] = (char *)malloc(sizeof(char) * (map->wid + 1));
+		if (0 == map->map[idx])
+		{
+			free_malloc(map->map, idx);
+			error(strerror(errno), 0);
+		}
+		ft_memset(map->map[idx], 'b', map->wid);
+		map->map[idx][map->wid] = 0;
+		cpy_num = ft_strlcpy(map->map[idx], (char *)cur->content, map->wid + 1);
+		if ((int)cpy_num < map->wid)
+			map->map[idx][cpy_num] = 'b';
+		idx++;
+		cur = cur->next;
+	}
 	ft_lstclear(&(map->list), free_content);
+	print_map(map);
+}
+
+void	print_map(t_map *map)
+{
+	int	idx;
+	int j;
+
+	idx = 0;
+	while (map->map[idx])
+	{
+		j = 0;
+		while (map->map[idx][j])
+		{
+			printf("%c", map->map[idx][j]);
+			j++;
+		}
+		printf("\n");
+		idx++;
+	}
 }
