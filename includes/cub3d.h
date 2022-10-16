@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/16 13:51:24 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/16 16:40:28 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ void	get_map_arg(t_info *info);
 ** main.c
 */
 void	leaks(void);
+
+/*
+** map.c
+*/
+void	save_map_to_list(t_info *info);
 
 
 // /*
