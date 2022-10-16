@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:40:54 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/16 15:46:43 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/16 17:23:10 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,10 @@ void	get_map_arg(t_info *info)
 				save_img(info, type, line + 3);
 			else if ((idx == 4 || idx == 5))
 				save_rgb(map, type, line + 2);
+			free(line);
 			if (idx == 5) // 천장 정보까지 다 읽었으면 gnl을 멈춰야함(이제부터 content 읽기)
 				break ;
 			idx++;
 		}
-		free(line);
 	}
 }
