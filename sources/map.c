@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:01:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/16 16:40:29 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/16 17:20:40 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,20 @@ void	save_map_to_list(t_info *info)
 		else
 			ft_lstadd_back(&(map->list), ft_lstnew(line));
 	}
+}
+
+void	find_map_size(t_map *map)
+{
+	t_list	*cur;
+
+	cur = map->list;
+	while (cur)
+	{
+		if (map->wid < (int)ft_strlen((char *)(cur->content)))
+			map->wid = (int)ft_strlen((char *)(cur->content));
+		cur = cur->next;
+		map->hei++;
+	}
+	printf("%d %d\n", map->wid, map->hei);
+	ft_lstclear(&(map->list), free_content);
 }

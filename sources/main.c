@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:32:09 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/16 16:40:28 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/16 17:21:18 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	main(int argc, char **argv)
 	chk_file(&(info.map), argv[1]);
 	get_map_arg(&info);
 	save_map_to_list(&info);
+	find_map_size(&(info.map));
 	close(info.map.fd);
-	// atexit(leaks);
+	atexit(leaks);
 	return (0);
 }
