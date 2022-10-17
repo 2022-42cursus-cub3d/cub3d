@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 13:35:18 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 15:12:23 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 # define KEY_LEFT			123
 # define KEY_RIGHT			124
 
+# define NO					0
+# define SO					1
+# define WE					2
+# define EA					3
+
 typedef struct	s_img
 {
 	void	*img;
@@ -56,7 +61,7 @@ typedef struct s_map
 	int		fd;
 	int		wid;
 	int		hei;
-	int		flags;
+	char	dir;
 
 	t_img	imgs[4];
 	t_rgb	floor;
@@ -68,8 +73,8 @@ typedef struct s_map
 
 typedef struct s_pos
 {
-	int			x;
-	int			y;
+	int		x;
+	int		y;
 }	t_pos;
 
 typedef struct s_info
