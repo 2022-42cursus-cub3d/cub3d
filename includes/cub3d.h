@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 15:12:23 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 15:27:47 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,17 @@ typedef struct s_pos
 	int		y;
 }	t_pos;
 
+typedef struct	s_key
+{
+	bool	key_w;
+	bool	key_a;
+	bool	key_s;
+	bool	key_d;
+
+	bool	key_left;
+	bool	key_right;
+}	t_key;
+
 typedef struct s_info
 {
 	void	*mlx;
@@ -84,6 +95,7 @@ typedef struct s_info
 
 	t_map	map;
 	t_pos	pos;
+	t_key	key;
 }	t_info;
 
 /*
@@ -120,7 +132,7 @@ void	free_malloc(char **str, int num);
 /*
 ** chk_valid.c
 */
-void	chk_valid_map(t_map *map);
+void	chk_valid_map(t_info *info);
 
 
 

@@ -6,18 +6,20 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:14:55 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 15:15:04 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 15:28:27 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	chk_valid_map(t_map *map)
+void	chk_valid_map(t_info *info)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	t_map	*map;
 
 	i = 0;
+	map = &(info->map);
 	while (map->map[i])
 	{
 		j = 0;
@@ -39,6 +41,11 @@ void	chk_valid_map(t_map *map)
 					free_malloc(map->map, map->hei);
 					error("Invalid map", 0);
 				}
+			}
+			if (map->dir == map->map[i][j])
+			{
+				info->pos.x = j;
+				info->pos.y = i;
 			}
 			j++;
 		}

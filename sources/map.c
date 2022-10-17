@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:01:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 13:10:20 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 15:07:50 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_content(void *content)
 	content = 0;
 }
 
-bool	chk_line(char *str)
+bool	chk_line(t_map *map, char *str)
 {
 	static bool	p_flag = false;
 	int	idx;
@@ -28,11 +28,12 @@ bool	chk_line(char *str)
 	{
 		if ('0' == str[idx] || '1' == str[idx] || ' ' == str[idx])
 			continue ;
-		else if ('N' == str[idx] || 'S' == str[idx] || 'E' == str[idx]
-			|| 'W' == str[idx])
+		else if ('N' == str[idx] || 'S' == str[idx] || 'W' == str[idx]
+			|| 'E' == str[idx])
 		{
 			if (true == p_flag)
 				return (false);
+			map->dir = str[idx];
 			p_flag = true;
 		}
 		else
@@ -81,7 +82,7 @@ void	save_map_to_list(t_info *info)
 			ft_lstclear(&(map->list), free_content);
 			error("Map must have no empty lines", line);
 		}
-		if (false == chk_line(line))
+		if (false == chk_line(map, line))
 		{
 			ft_lstclear(&(map->list), free_content);
 			error("The map must be composed of only 6 possible characters: 0, 1 and N, S, E or W", line);
@@ -167,6 +168,7 @@ void	replace_space(t_map *map)
 		i++;
 	}
 	print_map(map);
+	printf("dir: %c\n", map->dir);
 }
 
 void	print_map(t_map *map)
