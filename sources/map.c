@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:01:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 01:22:03 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 13:10:20 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,28 @@ void	save_map(t_map *map)
 		cur = cur->next;
 	}
 	ft_lstclear(&(map->list), free_content);
+	print_map(map);
+	printf("\n\n");
+	replace_space(map);
+}
+
+void	replace_space(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (' ' == map->map[i][j])
+				map->map[i][j] = 'b';
+			j++;
+		}
+		i++;
+	}
 	print_map(map);
 }
 

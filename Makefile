@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/17 01:04:15 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/17 13:35:38 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS = ${SRC}/main.c	\
 		${SRC}/check.c	\
 		${SRC}/error.c	\
 		${SRC}/map.c	\
-		${SRC}/free.c
+		${SRC}/free.c	\
+		${SRC}/chk_valid.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME) 
