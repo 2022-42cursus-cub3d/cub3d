@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 15:27:47 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 16:10:25 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,24 @@
 # include "../libft_gnl/get_next_line/get_next_line.h"
 # include "../minilibx_opengl_20191021/mlx.h"
 
-# define X_EVENT_KEY_PRESS	2
-# define X_EVENT_KEY_EXIT	17
-# define KEY_ESC			53
-# define KEY_W				13
-# define KEY_A				0
-# define KEY_S				1
-# define KEY_D				2
-# define KEY_LEFT			123
-# define KEY_RIGHT			124
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_KEY_EXIT		17
+# define KEY_ESC				53
+# define KEY_W					13
+# define KEY_A					0
+# define KEY_S					1
+# define KEY_D					2
+# define KEY_LEFT				123
+# define KEY_RIGHT				124
 
-# define NO					0
-# define SO					1
-# define WE					2
-# define EA					3
+# define NO						0
+# define SO						1
+# define WE						2
+# define EA						3
+
+# define WID					640
+# define HEI					480
 
 typedef struct	s_img
 {
@@ -79,19 +83,20 @@ typedef struct s_pos
 
 typedef struct	s_key
 {
-	bool	key_w;
-	bool	key_a;
-	bool	key_s;
-	bool	key_d;
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
 
-	bool	key_left;
-	bool	key_right;
+	bool	left;
+	bool	right;
 }	t_key;
 
 typedef struct s_info
 {
 	void	*mlx;
 	void	*win;
+	t_img	img;
 
 	t_map	map;
 	t_pos	pos;
@@ -102,6 +107,7 @@ typedef struct s_info
 ** error.c
 */
 void	error(char *err_msg, char *alloc_str);
+int		terminate(t_info *info);
 
 /*
 ** check.c
@@ -134,23 +140,16 @@ void	free_malloc(char **str, int num);
 */
 void	chk_valid_map(t_info *info);
 
+/*
+** event.c
+*/
+int		key_press(int keycode, t_info *info);
+int		key_release(int keycode, t_info *info);
 
+/*
+** draw.c
+*/
+int		draw_image(t_info *info);
 
-// /*
-// ** utils.c
-// */
-// t_info	*info(void);
-
-// /*
-// ** parse.c
-// */
-// bool	is_parse_err(int argc, char **argv);
-
-// /*
-// ** parse_utils.c
-// */
-// bool	parse_err(char *err_msg, char *malloc_str);
-// void	max_num(size_t *max, size_t num);
-// bool	map_open(char *str);
 
 #endif
