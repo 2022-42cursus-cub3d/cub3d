@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:32:09 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 16:37:27 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/17 16:51:07 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	init_mlx(t_info *info)
 	info->img.img = mlx_new_image(info->mlx, WID, HEI);
 	info->img.addr = mlx_get_data_addr(info->img.img, &(info->img.bpp)
 		, &(info->img.line_len), &(info->img.endian));
-	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, info);
-	mlx_hook(info->win, X_EVENT_KEY_RELEASE, 0, &key_release, info);
+	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, key_press, info);
+	mlx_hook(info->win, X_EVENT_KEY_RELEASE, 0, key_release, info);
 	mlx_hook(info->win, X_EVENT_KEY_EXIT, 0, terminate, info);
 	mlx_loop_hook(info->mlx, draw_image, info);
 	mlx_loop(info->mlx);
