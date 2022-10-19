@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:01:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 15:07:50 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/19 19:29:10 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,14 @@ void	save_map_to_list(t_info *info)
 void	find_map_size(t_map *map)
 {
 	t_list	*cur;
+	int		len;
 
 	cur = map->list;
 	while (cur)
 	{
-		if (map->wid < (int)ft_strlen((char *)(cur->content)))
-			map->wid = (int)ft_strlen((char *)(cur->content));
+		len = (int)ft_strlen((char *)cur->content);
+		if (map->wid < len)
+			map->wid = len;
 		cur = cur->next;
 		map->hei++;
 	}
@@ -171,6 +173,9 @@ void	replace_space(t_map *map)
 	printf("dir: %c\n", map->dir);
 }
 
+/*
+** 맵 확인하기 위해 추가한 함수 -> 제출 시 삭제
+*/
 void	print_map(t_map *map)
 {
 	int	idx;

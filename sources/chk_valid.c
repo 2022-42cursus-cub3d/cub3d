@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:14:55 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/19 13:05:37 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/19 19:16:48 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	chk_valid_map(t_info *info)
 				}
 				if (map->dir == map->map[i][j])
 				{
-					info->pos.x = j;
-					info->pos.y = i;
+					info->pos.x = (double)j;
+					info->pos.y = (double)i;
 				}
 			}
 			j++;

@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 16:10:25 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/19 19:13:46 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct	s_rgb
 	int		rgb;
 }	t_rgb;
 
-typedef struct s_map
+typedef struct	s_map
 {
 	int		fd;
 	int		wid;
@@ -75,11 +75,17 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
-typedef struct s_pos
+typedef struct	s_pos_i
 {
 	int		x;
 	int		y;
-}	t_pos;
+}	t_pos_i;
+
+typedef struct	s_pos_d
+{
+	double	x;
+	double	y;
+}	t_pos_d;
 
 typedef struct	s_key
 {
@@ -92,14 +98,14 @@ typedef struct	s_key
 	bool	right;
 }	t_key;
 
-typedef struct s_info
+typedef struct	s_info
 {
 	void	*mlx;
 	void	*win;
 	t_img	img;
 
 	t_map	map;
-	t_pos	pos;
+	t_pos_d	pos;
 	t_key	key;
 }	t_info;
 
