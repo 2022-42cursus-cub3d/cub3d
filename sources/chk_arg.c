@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:40:54 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/19 19:26:36 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/20 12:24:02 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	chk_arg(int ac, char **av)
 
 void	chk_file(t_map *map, char *av)
 {
+	map->fd = open(av, O_DIRECTORY);
+	if (map->fd > 0)
+	{
+		close(map->fd);
+		error("The program must take a .cub file.", 0);
+	}
 	map->fd = open(av, O_RDONLY);
 	if (map->fd < 0)
 		error(strerror(errno), 0);

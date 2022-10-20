@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:32:09 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 16:51:07 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/20 12:19:39 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 	find_map_size(&(info.map));
 	save_map(&(info.map));
 	chk_valid_map(&info);
-	printf("pos x: %d, pos y: %d\n", info.pos.x, info.pos.y);
+	printf("pos x: %lf, pos y: %lf\n", info.pos.x, info.pos.y);
 	init_mlx(&info);
 	close(info.map.fd);
 	// atexit(leaks);
