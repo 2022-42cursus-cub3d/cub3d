@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/19 19:13:46 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:38:01 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 
 # define WID					640
 # define HEI					480
+
+# define MV_SPEED				0.05
+# define RT_SPEED				0.05
 
 typedef struct	s_img
 {
@@ -106,6 +109,10 @@ typedef struct	s_info
 
 	t_map	map;
 	t_pos_d	pos;
+	t_pos_d	dir;
+	t_pos_d	plane;
+	double	ratio;
+
 	t_key	key;
 }	t_info;
 
@@ -145,6 +152,7 @@ void	free_malloc(char **str, int num);
 ** chk_valid.c
 */
 void	chk_valid_map(t_info *info);
+void	decide_dir(t_info *info);
 
 /*
 ** event.c
