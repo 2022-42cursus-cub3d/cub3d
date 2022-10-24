@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:35:22 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/24 14:31:44 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:51:33 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	rotate(t_vector *vec, int direction)
 void	move(t_info *info)
 {
 	if (info->key.w == true)
-		move_vertical(info, -1);
-	else if (info->key.s == true)
 		move_vertical(info, 1);
+	else if (info->key.s == true)
+		move_vertical(info, -1);
 	else if (info->key.a == true)
 		move_horizontal(info, -1);
 	else if (info->key.d == true)

@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:56:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/24 15:04:00 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:49:32 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,57 @@ void	chk_hit(t_info *info)
 		vec->perp_wall_dist = (vec->map.y - vec->pos.y + (1 - vec->step.y) / 2) / vec->rayDir.y; 
 }
 
+void	draw_line(t_info *info)
+{
+	info->draw.line_hei = (int)(HEI / info->vec.perp_wall_dist);
+	info->draw.draw_start = (HEI / 2) - (info->draw.line_hei / 2);
+	if (info->draw.draw_start < 0)
+		info->draw.draw_start = 0;
+	info->draw.draw_end = (HEI / 2) + (info->draw.line_hei / 2);
+	if (info->draw.draw_end >= HEI)
+		info->draw.draw_end = HEI - 1;
+	if (info->vec.side == 0 && info->vec.step.x == 1)
+		info->draw.wall_idx = 3;
+	else if (info->vec.side == 0 && info->vec.step.x == -1)
+		info->draw.wall_idx = 2;
+	else if (info->vec.side == 1 && info->vec.step.y == 1)
+		info->draw.wall_idx = 1;
+	else
+		info->draw.wall_idx = 0;
+	if (info->vec.side == 0)
+		info->draw.wallX = info->vec.pos.y + info->vec.perp_wall_dist * info->vec.rayDir.y;
+	else
+		info->draw.wallX = info->vec.pos.x + info->vec.perp_wall_dist * info->vec.rayDir.x;
+	info->draw.wallX -= floor(info->draw.wallX);
+	info->draw.tex.x = (int)(info->draw.wallX * TEX_WID);
+	if (info->vec.side == 0 && info->vec.rayDir.x > 0)
+		info->draw.tex.x = TEX_WID - info->draw.tex.x - 1;
+	if (info->vec.side == 1 && info->vec.rayDir.y < 0)
+		info->draw.tex.x = TEX_WID - info->draw.tex.x - 1;
+	info->draw.step = 1.0 * TEX_HEI / info->draw.line_hei;
+	info->draw.tex_pos = (info->draw.draw_start - HEI / 2 + info->draw.line_hei / 2) * info->draw.step;
+}
+
+void draw(int x, t_info *info)
+{
+	int	y;
+	char	*dest;
+	char	*get;
+
+	y = info->draw.draw_start;
+	while (y < info->draw.draw_end)
+	{
+		info->draw.tex.y = (int)info->draw.tex_pos & (TEX_HEI - 1);
+		info->draw.tex_pos += info->draw.step;
+		get = info->map.imgs[info->draw.wall_idx].addr + (info->draw.tex.y * info->map.imgs[info->draw.wall_idx].line_len
+			+ info->map.imgs[info->draw.wall_idx].bpp / 8);
+		info->draw.color = *(unsigned int *)get;
+		dest = info->img.addr + (y * info->img.line_len + x * (info->img.bpp / 8));
+		*(unsigned int *)dest = info->draw.color;
+		y++;
+	}
+}
+
 void	dda(t_info *info)
 {
 	t_vector	*vec;
@@ -102,12 +153,16 @@ void	dda(t_info *info)
 			vec->side_dist.y = (vec->map.y + 1 - vec->pos.y) * vec->delta_dist.y;
 		}
 		chk_hit(info);
+		draw_line(info);
+		draw(x, info);
+		x++;
 	}
 }
 
 void	draw_image(t_info *info)
 {
 	draw_background(info);
+	dda(info);
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/24 15:19:12 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:53:15 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 
 # define WID					640
 # define HEI					480
+
+# define TEX_WID				64
+# define TEX_HEI				64
 
 # define MV_SPEED				0.05
 # define RT_SPEED				0.05
@@ -117,6 +120,19 @@ typedef struct	s_vector
 	double		perp_wall_dist;
 }	t_vector;
 
+typedef struct	s_draw
+{
+	int			line_hei;
+	int			draw_start;
+	int			draw_end;
+	int			wall_idx;
+	double		wallX;
+	double		tex_pos;
+	double		step;
+	int			color;
+	t_pos_i		tex;
+}	t_draw;
+
 typedef struct	s_info
 {
 	void		*mlx;
@@ -127,6 +143,7 @@ typedef struct	s_info
 	t_vector	vec;
 	double		camera;
 	t_key		key;
+	t_draw		draw;
 }	t_info;
 
 /*

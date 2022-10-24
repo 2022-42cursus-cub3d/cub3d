@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:36:18 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/24 14:38:41 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:45:54 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ int	game_loop(t_info *info)
 {
 	move(info);
 	draw_image(info);
+	return (0);
 }
