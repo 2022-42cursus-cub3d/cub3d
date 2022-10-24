@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/20 15:38:01 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/24 15:19:12 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,73 +47,86 @@
 
 typedef struct	s_img
 {
-	void	*img;
-	int		wid;
-	int		hei;
+	void		*img;
+	int			wid;
+	int			hei;
 
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
 }	t_img;
 
 typedef struct	s_rgb
 {
-	int		rgbs[3];
-	int		rgb;
+	int			rgbs[3];
+	int			rgb;
 }	t_rgb;
 
 typedef struct	s_map
 {
-	int		fd;
-	int		wid;
-	int		hei;
-	char	dir;
+	int			fd;
+	int			wid;
+	int			hei;
+	char		dir;
 
-	t_img	imgs[4];
-	t_rgb	floor;
-	t_rgb	ceiling;
+	t_img		imgs[4];
+	t_rgb		floor;
+	t_rgb		ceiling;
 
-	t_list	*list;
-	char	**map;
+	t_list		*list;
+	char		**map;
 }	t_map;
 
 typedef struct	s_pos_i
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 }	t_pos_i;
 
 typedef struct	s_pos_d
 {
-	double	x;
-	double	y;
+	double		x;
+	double		y;
 }	t_pos_d;
 
 typedef struct	s_key
 {
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
+	bool		w;
+	bool		a;
+	bool		s;
+	bool		d;
 
-	bool	left;
-	bool	right;
+	bool		left;
+	bool		right;
 }	t_key;
+
+typedef struct	s_vector
+{
+	t_pos_d		pos;
+	t_pos_d		dir;
+	t_pos_d		plane;
+	t_pos_i		map;
+	t_pos_i		step;
+	int			side; // 기울기에 따라 x축, y축 달라짐
+	double		cameraX;
+	
+	t_pos_d		rayDir;
+	t_pos_d		side_dist;
+	t_pos_d		delta_dist;
+	double		perp_wall_dist;
+}	t_vector;
 
 typedef struct	s_info
 {
-	void	*mlx;
-	void	*win;
-	t_img	img;
+	void		*mlx;
+	void		*win;
+	t_img		img;
 
-	t_map	map;
-	t_pos_d	pos;
-	t_pos_d	dir;
-	t_pos_d	plane;
-	double	ratio;
-
-	t_key	key;
+	t_map		map;
+	t_vector	vec;
+	double		camera;
+	t_key		key;
 }	t_info;
 
 /*
@@ -155,15 +168,22 @@ void	chk_valid_map(t_info *info);
 void	decide_dir(t_info *info);
 
 /*
-** event.c
+** hook.c
 */
 int		key_press(int keycode, t_info *info);
 int		key_release(int keycode, t_info *info);
+int		game_loop(t_info *info);
 
 /*
 ** draw.c
 */
-int		draw_image(t_info *info);
+void	draw_image(t_info *info);
+
+/*
+** move.c
+*/
+void	move(t_info *info);
+
 
 
 #endif

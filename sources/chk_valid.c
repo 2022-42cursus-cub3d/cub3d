@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:14:55 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/20 14:56:40 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/24 15:19:25 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	chk_valid_map(t_info *info)
 				}
 				if (map->dir == map->map[i][j])
 				{
-					info->pos.x = (double)j;
-					info->pos.y = (double)i;
+					info->vec.pos.x = (double)j;
+					info->vec.pos.y = (double)i;
 				}
 			}
 			j++;
@@ -55,14 +55,28 @@ void	chk_valid_map(t_info *info)
 
 void	decide_dir(t_info *info)
 {
-	info->dir.x = 0;
-	info->dir.y = 0;
+	info->vec.dir.x = 0;
+	info->vec.dir.y = 0;
+	info->vec.plane.x = 0;
+	info->vec.plane.y = 0;
 	if ('N'== info->map.dir)
-		info->dir.y = -1;
+	{
+		info->vec.dir.y = -1;
+		info->vec.plane.x = 0.66;
+	}
 	else if ('S' == info->map.dir)
-		info->dir.y = 1;
+	{
+		info->vec.dir.y = 1;
+		info->vec.plane.x = -0.66;
+	}
 	else if ('W' == info->map.dir)
-		info->dir.x = -1;
+	{
+		info->vec.dir.x = -1;
+		info->vec.plane.y = -0.66;
+	}
 	else if ('E' == info->map.dir)
-		info->dir.y = 1;
+	{
+		info->vec.dir.x = 1;
+		info->vec.plane.y = 0.66;
+	}
 }

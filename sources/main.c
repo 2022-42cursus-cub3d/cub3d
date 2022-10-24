@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:32:09 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/20 14:57:01 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/24 14:35:11 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_mlx(t_info *info)
 	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, key_press, info);
 	mlx_hook(info->win, X_EVENT_KEY_RELEASE, 0, key_release, info);
 	mlx_hook(info->win, X_EVENT_KEY_EXIT, 0, terminate, info);
-	mlx_loop_hook(info->mlx, draw_image, info);
+	mlx_loop_hook(info->mlx, game_loop, info);
 	mlx_loop(info->mlx);
 }
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 	save_map(&(info.map));
 	chk_valid_map(&info);
 	decide_dir(&info);
-	printf("pos x: %lf, pos y: %lf\n", info.pos.x, info.pos.y);
+	printf("pos x: %lf, pos y: %lf\n", info.vec.pos.x, info.vec.pos.y);
 	init_mlx(&info);
 	close(info.map.fd);
 	// atexit(leaks);

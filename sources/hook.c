@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event.c                                            :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:36:18 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/17 16:07:37 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/24 14:38:41 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ int	key_release(int keycode, t_info *info)
 	else if (keycode == KEY_RIGHT)
 		info->key.right = false;
 	return (0);
+}
+
+int	game_loop(t_info *info)
+{
+	move(info);
+	draw_image(info);
 }
