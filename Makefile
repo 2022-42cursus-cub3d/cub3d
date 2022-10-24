@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/24 14:39:10 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/24 19:00:51 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 # CFLAGS = -g3 -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror
 MAKE = make
-NAME = cub3d
+NAME = cub3D
 MLX = -I./minilibx_opengl_20191021 -L./minilibx_opengl_20191021 -lmlx
 LIBFT_GNL = -I./libft_gnl -I./libft_gnl/get_next_line -L./libft_gnl -lft_gnl
 INC = -I./includes
