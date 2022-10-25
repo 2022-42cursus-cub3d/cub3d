@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:41:39 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/19 19:29:38 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 13:32:36 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	terminate(t_info *info)
 	mlx_destroy_image(info->mlx, info->img.img);
 	mlx_destroy_window(info->mlx, info->win);
 	free_malloc(info->map.map, info->map.hei);
+	atexit(leaks);
 	exit(0);
 	return (0);
 }
