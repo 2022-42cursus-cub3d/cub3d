@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/25 14:59:12 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/25 18:51:07 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = ${SRC}/main.c			\
 		${SRC}/map.c			\
 		${SRC}/hook.c			\
 		${SRC}/draw.c			\
+		${SRC}/draw_utils.c		\
 		${SRC}/move.c			\
 		${SRC}/chk_valid.c
 OBJS = $(SRCS:.c=.o)

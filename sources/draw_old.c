@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_old.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:56:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/24 18:49:32 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 19:29:28 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_background(t_info *info)
 		y = 0;
 		while (y < HEI)
 		{
-			dest = info->img.addr + (y * info->img.line_len + x * (info->img.bpp / 8));
+			dest = info->img.addr + (y * info->img.len + x * (info->img.bpp / 8));
 			if (y < HEI / 2)
 				*(unsigned int *)dest = info->map.ceiling.rgb;
 			else
@@ -107,10 +107,10 @@ void draw(int x, t_info *info)
 	{
 		info->draw.tex.y = (int)info->draw.tex_pos & (TEX_HEI - 1);
 		info->draw.tex_pos += info->draw.step;
-		get = info->map.imgs[info->draw.wall_idx].addr + (info->draw.tex.y * info->map.imgs[info->draw.wall_idx].line_len
+		get = info->map.imgs[info->draw.wall_idx].addr + (info->draw.tex.y * info->map.imgs[info->draw.wall_idx].len
 			+ info->map.imgs[info->draw.wall_idx].bpp / 8);
 		info->draw.color = *(unsigned int *)get;
-		dest = info->img.addr + (y * info->img.line_len + x * (info->img.bpp / 8));
+		dest = info->img.addr + (y * info->img.len + x * (info->img.bpp / 8));
 		*(unsigned int *)dest = info->draw.color;
 		y++;
 	}
@@ -159,7 +159,7 @@ void	dda(t_info *info)
 	}
 }
 
-void	draw_image(t_info *info)
+void	draw(t_info *info)
 {
 	draw_background(info);
 	dda(info);

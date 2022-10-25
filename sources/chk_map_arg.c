@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chk_arg.c                                          :+:      :+:    :+:   */
+/*   chk_map_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:40:54 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 13:54:58 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 19:29:28 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	save_img(t_info *info, int idx, char *path)
 		, &(simg->hei));
 	if (NULL == simg->img)
 		error("Texture file error", path - 3);
-	simg->addr = mlx_get_data_addr(simg->img, &(simg->bpp), &(simg->line_len)
+	simg->addr = mlx_get_data_addr(simg->img, &(simg->bpp), &(simg->len)
 		, &(simg->endian));
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 18:22:58 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 19:43:52 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define TEX_HEI				64
 
 # define MV_SPEED				0.05
-# define RT_SPEED				0.05
+# define RT_SPEED				0.03
 
 typedef struct	s_img
 {
@@ -56,7 +56,7 @@ typedef struct	s_img
 
 	char		*addr;
 	int			bpp;
-	int			line_len;
+	int			len;
 	int			endian;
 }	t_img;
 
@@ -189,9 +189,16 @@ int		key_release(int keycode, t_info *info);
 int		game_loop(t_info *info);
 
 /*
+** draw_utils.c
+*/
+void	set_vector(t_vector *vec, int x);
+void	dda(t_info *info, t_vector *vec, t_draw *draw);
+void	set_wall_texture(t_info *info);
+
+/*
 ** draw.c
 */
-void	draw_image(t_info *info);
+void	draw(t_info *info);
 
 /*
 ** move.c
