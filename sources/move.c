@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:35:22 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/24 21:25:07 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 19:48:00 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	move_vertical(t_info *info, int direction)
 	tmp = info->vec.pos;
 	tmp.x += direction * info->vec.dir.x * MV_SPEED;
 	tmp.y += direction * info->vec.dir.y * MV_SPEED;
-	if (info->map.map[(int)tmp.y][(int)tmp.x] != '1')
-		info->vec.pos = tmp;
+	if (info->map.map[(int)info->vec.pos.y][(int)tmp.x] != '1')
+		info->vec.pos.x = tmp.x;
+	if (info->map.map[(int)tmp.y][(int)info->vec.pos.x] != '1')
+		info->vec.pos.y = tmp.y;
 }
 
 void	move_horizontal(t_info *info, int direction)
@@ -30,8 +32,10 @@ void	move_horizontal(t_info *info, int direction)
 	tmp = info->vec.pos;
 	tmp.x += direction * info->vec.plane.x * MV_SPEED;
 	tmp.y += direction * info->vec.plane.y * MV_SPEED;
-	if (info->map.map[(int)tmp.y][(int)tmp.x] != '1')
-		info->vec.pos = tmp;
+	if (info->map.map[(int)info->vec.pos.y][(int)tmp.x] != '1')
+		info->vec.pos.x = tmp.x;
+	if (info->map.map[(int)tmp.y][(int)info->vec.pos.x] != '1')
+		info->vec.pos.y = tmp.y;
 }
 
 void	rotate(t_vector *vec, int direction)
