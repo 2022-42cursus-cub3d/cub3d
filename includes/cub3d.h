@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 13:20:23 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 14:59:24 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,42 +147,40 @@ typedef struct	s_info
 }	t_info;
 
 /*
-** error.c
+** temp_utils.c
 */
+void	leaks(void);
+void	print_map(t_map *map);
+
+/*
+** utils.c
+*/
+void	free_malloc(char **str, int num);
+void	free_list_content(void *content);
 void	error(char *err_msg, char *alloc_str);
 int		terminate(t_info *info);
 
 /*
-** check.c
+** chk_map_arg.c
 */
-void	chk_arg(int ac, char **av);
-void	chk_file(t_map *map, char *av);
-void	get_map_arg(t_info *info);
+void	chk_arg(int ac, char **av, t_map *map);
+void	save_map_arg(t_info *info);
 
 /*
-** main.c
+** map_list.c
 */
-void	leaks(void);
+void	save_map_to_list(t_map *map);
 
 /*
 ** map.c
 */
-void	save_map_to_list(t_info *info);
-void	find_map_size(t_map *map);
 void	save_map(t_map *map);
-void	print_map(t_map *map);
-void	replace_space(t_map *map);
-
-/*
-** free.c
-*/
-void	free_malloc(char **str, int num);
 
 /*
 ** chk_valid.c
 */
 void	chk_valid_map(t_info *info);
-void	decide_dir(t_info *info);
+void	init_dir_vec(t_info *info);
 
 /*
 ** hook.c
@@ -200,7 +198,5 @@ void	draw_image(t_info *info);
 ** move.c
 */
 void	move(t_info *info);
-
-
 
 #endif

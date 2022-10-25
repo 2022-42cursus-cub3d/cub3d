@@ -6,11 +6,29 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:14:55 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/24 15:19:25 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 15:01:40 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static void	chk_surround(t_map *map, int i, int j)
+{
+	if (i == 0 || i == map->hei - 1 
+		|| j == 0 || j == map->wid - 1)
+	{
+		free_malloc(map->map, map->hei);
+		error("Invalid map", 0);
+	}
+	if ((i > 0 && 'b' == map->map[i - 1][j])
+		|| (i + 1 < map->hei && 'b' == map->map[i + 1][j])
+		|| (j > 0 && 'b' == map->map[i][j - 1])
+		|| (j + 1 < map->wid && 'b' == map->map[i][j + 1]))
+	{
+		free_malloc(map->map, map->hei);
+		error("Invalid map", 0);
+	}
+}
 
 void	chk_valid_map(t_info *info)
 {
@@ -27,20 +45,7 @@ void	chk_valid_map(t_info *info)
 		{
 			if ('0' == map->map[i][j] || map->dir == map->map[i][j])
 			{
-				if (i == 0 || i == map->hei - 1 
-					|| j == 0 || j == map->wid - 1)
-				{
-					free_malloc(map->map, map->hei);
-					error("Invalid map", 0);
-				}
-				if ((i > 0 && 'b' == map->map[i - 1][j])
-					|| (i + 1 < map->hei && 'b' == map->map[i + 1][j])
-					|| (j > 0 && 'b' == map->map[i][j - 1])
-					|| (j + 1 < map->wid && 'b' == map->map[i][j + 1]))
-				{
-					free_malloc(map->map, map->hei);
-					error("Invalid map", 0);
-				}
+				chk_surround(map, i, j);
 				if (map->dir == map->map[i][j])
 				{
 					info->vec.pos.x = (double)j;
@@ -53,7 +58,7 @@ void	chk_valid_map(t_info *info)
 	}
 }
 
-void	decide_dir(t_info *info)
+void	init_dir_vec(t_info *info)
 {
 	info->vec.dir.x = 0;
 	info->vec.dir.y = 0;

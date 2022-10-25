@@ -6,33 +6,29 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:40:54 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/20 12:24:02 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 13:54:58 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	chk_arg(int ac, char **av)
+void	chk_arg(int argc, char **argv, t_map *map)
 {
-	if (2 != ac || 4 > ft_strlen(av[1])
-		|| ft_strncmp(".cub", av[1] + (ft_strlen(av[1]) - 4), 4))
+	if (2 != argc || 4 > ft_strlen(argv[1])
+		|| ft_strncmp(".cub", argv[1] + (ft_strlen(argv[1]) - 4), 4))
 		error("The program must take a .cub file.", 0);
-}
-
-void	chk_file(t_map *map, char *av)
-{
-	map->fd = open(av, O_DIRECTORY);
+	map->fd = open(argv[1], O_DIRECTORY);
 	if (map->fd > 0)
 	{
 		close(map->fd);
 		error("The program must take a .cub file.", 0);
 	}
-	map->fd = open(av, O_RDONLY);
+	map->fd = open(argv[1], O_RDONLY);
 	if (map->fd < 0)
 		error(strerror(errno), 0);
 }
 
-int	find_type(char *line)
+static int	find_type(char *line)
 {
 	static char	*ids[] = { "NO", "SO", "WE", "EA", "F ", "C " };
 	int			idx;
@@ -47,7 +43,7 @@ int	find_type(char *line)
 	return (-1);
 }
 
-void	save_img(t_info *info, int idx, char *path)
+static void	save_img(t_info *info, int idx, char *path)
 {
 	t_img	*simg;
 
@@ -62,7 +58,7 @@ void	save_img(t_info *info, int idx, char *path)
 		, &(simg->endian));
 }
 
-bool	is_number(char *str)
+static bool	is_number(char *str)
 {
 	while (*str)
 	{
@@ -76,7 +72,7 @@ bool	is_number(char *str)
 /*
 ** rgb의 rgb는 -1로 초기화되어 있다고 가정
 */
-void	save_rgb(t_map *map, int tidx, char *str)
+static void	save_rgb(t_map *map, int tidx, char *str)
 {
 	t_rgb	*rgb;
 	char	**split;
@@ -108,7 +104,7 @@ void	save_rgb(t_map *map, int tidx, char *str)
 	rgb->rgb = (rgb->rgbs[0] << 16) + (rgb->rgbs[1] << 8) + rgb->rgbs[2];
 }
 
-void	get_map_arg(t_info *info)
+void	save_map_arg(t_info *info)
 {
 	t_map	*map;
 	char	*line;
@@ -126,22 +122,19 @@ void	get_map_arg(t_info *info)
 			continue ;
 		}
 		type = find_type(line);
-		if (idx < 6)
-		{
-			if (type < 0)
-				error("Map error", line);
-			else if (idx > type)
-				error("Type information is duplicated.", line);
-			else if (idx < type)
-				error("Type identifiers must be followed a strict order.", line);
-			if (idx < 4)
-				save_img(info, type, line + 3);
-			else if ((idx == 4 || idx == 5))
-				save_rgb(map, type, line + 2);
-			free(line);
-			if (idx == 5) // 천장 정보까지 다 읽었으면 gnl을 멈춰야함(이제부터 content 읽기)
-				break ;
-			idx++;
-		}
+		if (type < 0)
+			error("Map error", line);
+		else if (idx > type)
+			error("Type information is duplicated.", line);
+		else if (idx < type)
+			error("Type identifiers must be followed a strict order.", line);
+		if (idx < 4)
+			save_img(info, type, line + 3);
+		else if ((idx == 4 || idx == 5))
+			save_rgb(map, type, line + 2);
+		free(line);
+		if (idx == 5) // 천장 정보까지 다 읽었으면 gnl을 멈춰야함(이제부터 content 읽기)
+			break ;
+		idx++;
 	}
 }

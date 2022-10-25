@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/24 19:00:51 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/25 14:59:12 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,15 @@ LIBFT_GNL = -I./libft_gnl -I./libft_gnl/get_next_line -L./libft_gnl -lft_gnl
 INC = -I./includes
 FRAMEWORK = -framework OpenGL -framework Appkit
 SRC = ./sources
-SRCS = ${SRC}/main.c		\
-		${SRC}/chk_arg.c	\
-		${SRC}/error.c		\
-		${SRC}/map.c		\
-		${SRC}/free.c		\
-		${SRC}/hook.c		\
-		${SRC}/draw.c		\
-		${SRC}/move.c		\
+SRCS = ${SRC}/main.c			\
+		${SRC}/utils.c			\
+		${SRC}/temp_utils.c		\
+		${SRC}/chk_map_arg.c	\
+		${SRC}/map_list.c		\
+		${SRC}/map.c			\
+		${SRC}/hook.c			\
+		${SRC}/draw.c			\
+		${SRC}/move.c			\
 		${SRC}/chk_valid.c
 OBJS = $(SRCS:.c=.o)
 

@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   temp_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 12:41:39 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 13:32:36 by hyojlee          ###   ########.fr       */
+/*   Created: 2022/10/25 13:56:47 by hyojlee           #+#    #+#             */
+/*   Updated: 2022/10/25 14:53:30 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	error(char *err_msg, char *alloc_str)
+void	leaks(void)
 {
-	if (0 != alloc_str)
-		free(alloc_str);
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(err_msg, 2);
-	exit(1);
+	system("leaks cub3D");
 }
 
-int	terminate(t_info *info)
+void	print_map(t_map *map)
 {
-	mlx_destroy_image(info->mlx, info->img.img);
-	mlx_destroy_window(info->mlx, info->win);
-	free_malloc(info->map.map, info->map.hei);
-	atexit(leaks);
-	exit(0);
-	return (0);
+	int	idx;
+	int j;
+
+	idx = 0;
+	while (map->map[idx])
+	{
+		j = 0;
+		while (map->map[idx][j])
+		{
+			printf("%c", map->map[idx][j]);
+			j++;
+		}
+		printf("\n");
+		idx++;
+	}
 }
