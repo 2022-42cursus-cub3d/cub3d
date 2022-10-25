@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:14:14 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/11 17:10:10 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 13:07:57 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,21 @@ int key_press(int keycode)
 }
 
 int main(void) {
-	data()->mlx = mlx_init();
-	data()->win = mlx_new_window(data()->mlx, 1920, 1080, "Hello world!");
-	data()->img = mlx_new_image(data()->mlx, 1920, 1080);
-	data()->addr = mlx_get_data_addr(data()->img, &(data()->bpp), &(data()->line_len), &(data()->endian));
-	my_mlx_pixel_put(0, 0, 0x00FFFF30);
-	mlx_put_image_to_window(data()->mlx, data()->win, data()->img, 0, 0);
-	mlx_hook(data()->win, X_EVENT_KEY_EXIT, 0, &game_over, 0);
-	mlx_hook(data()->win, X_EVENT_KEY_PRESS, 0, &key_press, 0);
-	mlx_loop(data()->mlx);
+	// data()->mlx = mlx_init();
+	// data()->win = mlx_new_window(data()->mlx, 1920, 1080, "Hello world!");
+	// data()->img = mlx_new_image(data()->mlx, 1920, 1080);
+	// data()->addr = mlx_get_data_addr(data()->img, &(data()->bpp), &(data()->line_len), &(data()->endian));
+	// my_mlx_pixel_put(0, 0, 0x00FFFF30);
+	// mlx_put_image_to_window(data()->mlx, data()->win, data()->img, 0, 0);
+	// mlx_hook(data()->win, X_EVENT_KEY_EXIT, 0, &game_over, 0);
+	// mlx_hook(data()->win, X_EVENT_KEY_PRESS, 0, &key_press, 0);
+	// mlx_loop(data()->mlx);
+	t_rgb rgb;
+
+	rgb.rgbs.blank = 0;
+	rgb.rgbs.red = 220;
+	rgb.rgbs.green = 200;
+	rgb.rgbs.blue = 200;
+	printf("%d\n%d\n", rgb.rgb, (220 << 16) + (200 << 8) + 200);
 	return (0);
 }
