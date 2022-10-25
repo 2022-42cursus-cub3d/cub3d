@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 14:59:24 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 18:22:58 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ typedef struct	s_draw
 	int			draw_start; // 어디서부터 그릴지
 	int			draw_end; // 어디까지 그릴지
 	int			wall_idx; // 어떤 방향의 벽을 그려야 하나
-	double		wallX; // x 위치
-	double		tex_pos; // y 위치
-	double		step; // 다음 그릴 y값까지의 거리
+	double		wallX; // 벽에 부딪힌 위치
+	double		tex_pos; // 그릴 y 위치
+	double		step; // y값 증가량(단위)
 	int			color; // 그릴 이미지에 대한 값
 	t_pos_i		tex; // 벽을 그리기 시작할 위치
 }	t_draw;
@@ -141,7 +141,6 @@ typedef struct	s_info
 
 	t_map		map;
 	t_vector	vec;
-	double		camera;
 	t_key		key;
 	t_draw		draw;
 }	t_info;

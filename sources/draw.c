@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:56:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/24 21:21:10 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/25 18:22:04 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	draw_line(t_info *info)
 	if (info->vec.side == 1 && info->vec.rayDir.y < 0)
 		info->draw.tex.x = TEX_WID - info->draw.tex.x - 1;
 	info->draw.step = 1.0 * TEX_HEI / info->draw.line_hei;
-	info->draw.tex_pos = (info->draw.draw_start - HEI / 2 + info->draw.line_hei / 2) * info->draw.step;
+	info->draw.tex_pos = (info->draw.draw_start - (HEI / 2 - info->draw.line_hei / 2)) * info->draw.step;
 }
 
 void draw(int x, t_info *info)
