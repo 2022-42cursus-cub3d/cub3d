@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:33:17 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 19:17:02 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 20:51:30 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	chk_hit(t_info *info)
 	vec = &(info->vec);
 	while (0 == hit)
 	{
-		if (vec->side_dist.x < vec->side_dist.y) // 기울기가 1보다 큼
+		if (vec->side_dist.x < vec->side_dist.y)
 		{
 			vec->side_dist.x += vec->delta_dist.x;
 			vec->map.x += vec->step.x;
@@ -77,10 +77,13 @@ static void	chk_hit(t_info *info)
 void	dda(t_info *info, t_vector *vec, t_draw *draw)
 {
 	chk_hit(info);
-	if (vec->side == 0)
-		vec->perp_wall_dist = (vec->map.x - vec->pos.x + (1 - vec->step.x) / 2) / vec->rayDir.x;
-	else 
-		vec->perp_wall_dist = (vec->map.y - vec->pos.y + (1 - vec->step.y) / 2) / vec->rayDir.y; 
+	vec->perp_wall_dist = (vec->map.x - vec->pos.x +(1 - vec->step.x) / 2)
+		/ vec->rayDir.x;
+	if (vec->side == 1)
+	{
+		vec->perp_wall_dist = (vec->map.y - vec->pos.y + (1 - vec->step.y) / 2)
+			/ vec->rayDir.y;
+	}
 	draw->line_hei = (int)(HEI / vec->perp_wall_dist);
 	draw->draw_start = (HEI / 2) - (draw->line_hei / 2);
 	if (draw->draw_start < 0)
@@ -95,7 +98,8 @@ void	dda(t_info *info, t_vector *vec, t_draw *draw)
 	draw->wallX -= floor(draw->wallX);
 	draw->tex.x = (int)(draw->wallX * (double)TEX_WID);
 	draw->step = 1.0 * TEX_HEI / draw->line_hei;
-	draw->tex_pos = (draw->draw_start - (HEI / 2 - draw->line_hei / 2)) * draw->step;
+	draw->tex_pos = (draw->draw_start - (HEI / 2 - draw->line_hei / 2))
+		*draw->step;
 }
 
 void	set_wall_texture(t_info *info)
