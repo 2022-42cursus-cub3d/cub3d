@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:33:17 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/26 20:51:30 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 21:01:01 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	set_step(t_vector *vec)
 {
-	if (vec->rayDir.x < 0)
+	if (vec->ray_dir.x < 0)
 	{
 		vec->step.x = -1;
 		vec->side_dist.x = (vec->pos.x - vec->map.x) * vec->delta_dist.x;
@@ -24,7 +24,7 @@ static void	set_step(t_vector *vec)
 		vec->step.x = 1;
 		vec->side_dist.x = (vec->map.x + 1 - vec->pos.x) * vec->delta_dist.x;
 	}
-	if (vec->rayDir.y < 0)
+	if (vec->ray_dir.y < 0)
 	{
 		vec->step.y = -1;
 		vec->side_dist.y = (vec->pos.y - vec->map.y) * vec->delta_dist.y;
@@ -38,13 +38,13 @@ static void	set_step(t_vector *vec)
 
 void	set_vector(t_vector *vec, int x)
 {
-	vec->cameraX = 2 * x / (double)WID - 1;
-	vec->rayDir.x = vec->dir.x + vec->plane.x * vec->cameraX;
-	vec->rayDir.y = vec->dir.y + vec->plane.y * vec->cameraX;
+	vec->camera_x = 2 * x / (double)WID - 1;
+	vec->ray_dir.x = vec->dir.x + vec->plane.x * vec->camera_x;
+	vec->ray_dir.y = vec->dir.y + vec->plane.y * vec->camera_x;
 	vec->map.x = (int)vec->pos.x;
 	vec->map.y = (int)vec->pos.y;
-	vec->delta_dist.x = fabs(1 / vec->rayDir.x);
-	vec->delta_dist.y = fabs(1 / vec->rayDir.y);
+	vec->delta_dist.x = fabs(1 / vec->ray_dir.x);
+	vec->delta_dist.y = fabs(1 / vec->ray_dir.y);
 	set_step(vec);
 }
 
@@ -78,11 +78,11 @@ void	dda(t_info *info, t_vector *vec, t_draw *draw)
 {
 	chk_hit(info);
 	vec->perp_wall_dist = (vec->map.x - vec->pos.x +(1 - vec->step.x) / 2)
-		/ vec->rayDir.x;
+		/ vec->ray_dir.x;
 	if (vec->side == 1)
 	{
 		vec->perp_wall_dist = (vec->map.y - vec->pos.y + (1 - vec->step.y) / 2)
-			/ vec->rayDir.y;
+			/ vec->ray_dir.y;
 	}
 	draw->line_hei = (int)(HEI / vec->perp_wall_dist);
 	draw->draw_start = (HEI / 2) - (draw->line_hei / 2);
@@ -92,11 +92,11 @@ void	dda(t_info *info, t_vector *vec, t_draw *draw)
 	if (draw->draw_end >= HEI)
 		draw->draw_end = HEI - 1;
 	if (vec->side == 0)
-		draw->wallX = vec->pos.y + vec->perp_wall_dist * vec->rayDir.y;
+		draw->wall_x = vec->pos.y + vec->perp_wall_dist * vec->ray_dir.y;
 	else
-		draw->wallX = vec->pos.x + vec->perp_wall_dist * vec->rayDir.x;
-	draw->wallX -= floor(draw->wallX);
-	draw->tex.x = (int)(draw->wallX * (double)TEX_WID);
+		draw->wall_x = vec->pos.x + vec->perp_wall_dist * vec->ray_dir.x;
+	draw->wall_x -= floor(draw->wall_x);
+	draw->tex.x = (int)(draw->wall_x * (double)TEX_WID);
 	draw->step = 1.0 * TEX_HEI / draw->line_hei;
 	draw->tex_pos = (draw->draw_start - (HEI / 2 - draw->line_hei / 2))
 		*draw->step;

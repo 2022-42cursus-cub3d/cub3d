@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:56:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 19:29:28 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 21:01:01 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	chk_hit(t_info *info)
 			hit = 1;
 	}
 	if (vec->side == 0)
-		vec->perp_wall_dist = (vec->map.x - vec->pos.x + (1 - vec->step.x) / 2) / vec->rayDir.x;
+		vec->perp_wall_dist = (vec->map.x - vec->pos.x + (1 - vec->step.x) / 2) / vec->ray_dir.x;
 	else 
-		vec->perp_wall_dist = (vec->map.y - vec->pos.y + (1 - vec->step.y) / 2) / vec->rayDir.y; 
+		vec->perp_wall_dist = (vec->map.y - vec->pos.y + (1 - vec->step.y) / 2) / vec->ray_dir.y; 
 }
 
 void	draw_line(t_info *info)
@@ -83,14 +83,14 @@ void	draw_line(t_info *info)
 	else
 		info->draw.wall_idx = 0;
 	if (info->vec.side == 0)
-		info->draw.wallX = info->vec.pos.y + info->vec.perp_wall_dist * info->vec.rayDir.y;
+		info->draw.wall_x = info->vec.pos.y + info->vec.perp_wall_dist * info->vec.ray_dir.y;
 	else
-		info->draw.wallX = info->vec.pos.x + info->vec.perp_wall_dist * info->vec.rayDir.x;
-	info->draw.wallX -= floor(info->draw.wallX);
-	info->draw.tex.x = (int)(info->draw.wallX * TEX_WID);
-	if (info->vec.side == 0 && info->vec.rayDir.x > 0)
+		info->draw.wall_x = info->vec.pos.x + info->vec.perp_wall_dist * info->vec.ray_dir.x;
+	info->draw.wall_x -= floor(info->draw.wall_x);
+	info->draw.tex.x = (int)(info->draw.wall_x * TEX_WID);
+	if (info->vec.side == 0 && info->vec.ray_dir.x > 0)
 		info->draw.tex.x = TEX_WID - info->draw.tex.x - 1;
-	if (info->vec.side == 1 && info->vec.rayDir.y < 0)
+	if (info->vec.side == 1 && info->vec.ray_dir.y < 0)
 		info->draw.tex.x = TEX_WID - info->draw.tex.x - 1;
 	info->draw.step = 1.0 * TEX_HEI / info->draw.line_hei;
 	info->draw.tex_pos = (info->draw.draw_start - HEI / 2 + info->draw.line_hei / 2) * info->draw.step;
@@ -125,14 +125,14 @@ void	dda(t_info *info)
 	vec = &(info->vec);
 	while (x < WID)
 	{
-		vec->cameraX = 2 * x / (double)WID - 1;
-		vec->rayDir.x = vec->dir.x + vec->plane.x * vec->cameraX;
-		vec->rayDir.y = vec->dir.y + vec->plane.y * vec->cameraX;
+		vec->camera_x = 2 * x / (double)WID - 1;
+		vec->ray_dir.x = vec->dir.x + vec->plane.x * vec->camera_x;
+		vec->ray_dir.y = vec->dir.y + vec->plane.y * vec->camera_x;
 		vec->map.x = (int)vec->pos.x;
 		vec->map.y = (int)vec->pos.y;
-		vec->delta_dist.x = fabs(1 / vec->rayDir.x);
-		vec->delta_dist.y = fabs(1 / vec->rayDir.y);
-		if (vec->rayDir.x < 0)
+		vec->delta_dist.x = fabs(1 / vec->ray_dir.x);
+		vec->delta_dist.y = fabs(1 / vec->ray_dir.y);
+		if (vec->ray_dir.x < 0)
 		{
 			vec->step.x = -1;
 			vec->side_dist.x = (vec->pos.x - vec->map.x) * vec->delta_dist.x;
@@ -142,7 +142,7 @@ void	dda(t_info *info)
 			vec->step.x = 1;
 			vec->side_dist.x = (vec->map.x + 1 - vec->pos.x) * vec->delta_dist.x;
 		}
-		if (vec->rayDir.y < 0)
+		if (vec->ray_dir.y < 0)
 		{
 			vec->step.y = -1;
 			vec->side_dist.y = (vec->pos.y - vec->map.y) * vec->delta_dist.y;

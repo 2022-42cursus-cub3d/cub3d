@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:56:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 19:43:20 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 21:01:01 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	draw_wall(t_info *info, t_vector *vec, t_draw *draw, t_map *map)
 	{
 		set_vector(vec, x);
 		dda(info, vec, draw);
-		if ((vec->side == 0 && vec->rayDir.x > 0)
-			|| (vec->side == 1 && vec->rayDir.y < 0))
+		if ((vec->side == 0 && vec->ray_dir.x > 0)
+			|| (vec->side == 1 && vec->ray_dir.y < 0))
 			draw->tex.x = TEX_WID - draw->tex.x - 1;
 		y = draw->draw_start - 1;
 		set_wall_texture(info);

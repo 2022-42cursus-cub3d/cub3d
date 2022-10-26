@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/26 20:41:22 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 21:03:20 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define MV_SPEED				0.05
 # define RT_SPEED				0.03
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void		*img;
 	int			wid;
@@ -60,13 +60,13 @@ typedef struct	s_img
 	int			endian;
 }	t_img;
 
-typedef struct	s_rgb
+typedef struct s_rgb
 {
 	int			rgbs[3];
 	int			rgb;
 }	t_rgb;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int			fd;
 	int			wid;
@@ -81,19 +81,19 @@ typedef struct	s_map
 	char		**map;
 }	t_map;
 
-typedef struct	s_pos_i
+typedef struct s_pos_i
 {
 	int			x;
 	int			y;
 }	t_pos_i;
 
-typedef struct	s_pos_d
+typedef struct s_pos_d
 {
 	double		x;
 	double		y;
 }	t_pos_d;
 
-typedef struct	s_key
+typedef struct s_key
 {
 	bool		w;
 	bool		a;
@@ -104,7 +104,7 @@ typedef struct	s_key
 	bool		right;
 }	t_key;
 
-typedef struct	s_vector
+typedef struct s_vector
 {
 	t_pos_d		pos; // player 위치
 	t_pos_d		dir; // player가 바라보는 위치
@@ -112,28 +112,27 @@ typedef struct	s_vector
 	t_pos_i		map; // pos벡터를 정수로 캐스팅한 값
 	t_pos_i		step; // x, y 축으로 이동해야하는 값
 	int			side; // 기울기에 따라 x축, y축 달라짐
-	double		cameraX; // 화면의 어느 점에 광선을 쏠 지 비율
-	
-	t_pos_d		rayDir; // 화면으로 쏘는 광선
+	double		camera_x; // 화면의 어느 점에 광선을 쏠 지 비율
+	t_pos_d		ray_dir; // 화면으로 쏘는 광선
 	t_pos_d		side_dist; // 현재 위치에서 다음 축까지의 거리
 	t_pos_d		delta_dist; // 1이 증가할 때의 거리(단위로 생각)
 	double		perp_wall_dist; // 벽과 평면 사이 수직 거리
 }	t_vector;
 
-typedef struct	s_draw
+typedef struct s_draw
 {
 	int			line_hei; // 그려야하는 길이
 	int			draw_start; // 어디서부터 그릴지
 	int			draw_end; // 어디까지 그릴지
 	int			wall_idx; // 어떤 방향의 벽을 그려야 하나
-	double		wallX; // 벽에 부딪힌 위치
+	double		wall_x; // 벽에 부딪힌 위치
 	double		tex_pos; // 그릴 y 위치
 	double		step; // y값 증가량(단위)
 	int			color; // 그릴 이미지에 대한 값
 	t_pos_i		tex; // 벽을 그리기 시작할 위치
 }	t_draw;
 
-typedef struct	s_info
+typedef struct s_info
 {
 	void		*mlx;
 	void		*win;
