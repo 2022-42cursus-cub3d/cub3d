@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 19:43:52 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 12:36:46 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define WE						2
 # define EA						3
 
-# define WID					640
-# define HEI					480
+# define WID					1240
+# define HEI					880
 
 # define TEX_WID				64
 # define TEX_HEI				64

@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:41:39 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 14:54:33 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 12:26:02 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	error(char *err_msg, char *alloc_str)
 int	terminate(t_info *info)
 {
 	mlx_destroy_image(info->mlx, info->img.img);
+	mlx_destroy_image(info->mlx, info->map.imgs[0].img);
+	mlx_destroy_image(info->mlx, info->map.imgs[1].img);
+	mlx_destroy_image(info->mlx, info->map.imgs[2].img);
+	mlx_destroy_image(info->mlx, info->map.imgs[3].img);
 	mlx_destroy_window(info->mlx, info->win);
 	free_malloc(info->map.map, info->map.hei);
 	close(info->map.fd);
