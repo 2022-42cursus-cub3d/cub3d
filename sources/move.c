@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:35:22 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 19:48:00 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 20:58:02 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ void	rotate(t_vector *vec, int direction)
 	t_pos_d	org;
 
 	org = vec->dir;
-	ret.x = org.x * cos(direction * RT_SPEED) - org.y * sin(direction * RT_SPEED);
-	ret.y = org.x * sin(direction * RT_SPEED) + org.y * cos(direction * RT_SPEED);
+	ret.x = org.x * cos(direction * RT_SPEED)
+		- org.y * sin(direction * RT_SPEED);
+	ret.y = org.x * sin(direction * RT_SPEED)
+		+ org.y * cos(direction * RT_SPEED);
 	vec->dir = ret;
 	org = vec->plane;
-	ret.x = org.x * cos(direction * RT_SPEED) - org.y * sin(direction * RT_SPEED);
-	ret.y = org.x * sin(direction * RT_SPEED) + org.y * cos(direction * RT_SPEED);
+	ret.x = org.x * cos(direction * RT_SPEED)
+		- org.y * sin(direction * RT_SPEED);
+	ret.y = org.x * sin(direction * RT_SPEED)
+		+ org.y * cos(direction * RT_SPEED);
 	vec->plane = ret;
 }
 
