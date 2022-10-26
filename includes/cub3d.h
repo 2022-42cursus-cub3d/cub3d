@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/26 12:36:46 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 20:41:22 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,13 @@ void	free_malloc(char **str, int num);
 void	free_list_content(void *content);
 void	error(char *err_msg, char *alloc_str);
 int		terminate(t_info *info);
+
+/*
+** chk_utils.c
+*/
+int		find_type(char *line, int idx);
+bool	is_number(char *str);
+void	free_split(char **split);
 
 /*
 ** chk_map_arg.c
