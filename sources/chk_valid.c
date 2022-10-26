@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:14:55 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 15:01:40 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 20:46:55 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	chk_surround(t_map *map, int i, int j)
 {
-	if (i == 0 || i == map->hei - 1 
+	if (i == 0 || i == map->hei - 1
 		|| j == 0 || j == map->wid - 1)
 	{
 		free_malloc(map->map, map->hei);
@@ -64,7 +64,7 @@ void	init_dir_vec(t_info *info)
 	info->vec.dir.y = 0;
 	info->vec.plane.x = 0;
 	info->vec.plane.y = 0;
-	if ('N'== info->map.dir)
+	if ('N' == info->map.dir)
 	{
 		info->vec.dir.y = -1;
 		info->vec.plane.x = 0.66;
