@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:14:55 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/27 15:04:13 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/27 15:25:06 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	chk_surround(t_map *map, int i, int j)
 		|| j == 0 || j == map->wid - 1)
 	{
 		free_malloc(map->map, map->hei);
-		error("Invalid map", 0);
+		error("The map must be closed.", 0);
 	}
 	if ((i > 0 && BLANK == map->map[i - 1][j])
 		|| (i + 1 < map->hei && BLANK == map->map[i + 1][j])
@@ -26,7 +26,7 @@ static void	chk_surround(t_map *map, int i, int j)
 		|| (j + 1 < map->wid && BLANK == map->map[i][j + 1]))
 	{
 		free_malloc(map->map, map->hei);
-		error("Invalid map", 0);
+		error("The map must be closed.", 0);
 	}
 }
 
