@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:41:39 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/26 12:26:02 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:37:44 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	error(char *err_msg, char *alloc_str)
 		free(alloc_str);
 	ft_putendl_fd("Error", 2);
 	ft_putendl_fd(err_msg, 2);
-	atexit(leaks);
 	exit(1);
 }
 
@@ -48,7 +47,6 @@ int	terminate(t_info *info)
 	mlx_destroy_window(info->mlx, info->win);
 	free_malloc(info->map.map, info->map.hei);
 	close(info->map.fd);
-	atexit(leaks);
 	exit(0);
 	return (0);
 }

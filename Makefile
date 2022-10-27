@@ -6,12 +6,11 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2022/10/26 20:23:51 by hyojlee          ###   ########.fr        #
+#    Updated: 2022/10/27 13:29:42 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-# CFLAGS = -g3 -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror
 MAKE = make
 NAME = cub3D
@@ -22,7 +21,6 @@ FRAMEWORK = -framework OpenGL -framework Appkit
 SRC = ./sources
 SRCS = ${SRC}/main.c			\
 		${SRC}/utils.c			\
-		${SRC}/temp_utils.c		\
 		${SRC}/chk_utils.c		\
 		${SRC}/chk_map_arg.c	\
 		${SRC}/map_list.c		\

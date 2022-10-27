@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/26 21:05:15 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:29:35 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,6 @@ typedef struct s_info
 	t_key		key;
 	t_draw		draw;
 }	t_info;
-
-/*
-** temp_utils.c
-*/
-void	leaks(void);
-void	print_map(t_map *map);
 
 /*
 ** utils.c

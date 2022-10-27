@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:01:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 14:50:47 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:30:53 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	get_map_size(t_map *map)
 		cur = cur->next;
 		map->hei++;
 	}
-	printf("%d %d\n", map->wid, map->hei);
 }
 
 static void	replace_space(t_map *map)
@@ -46,8 +45,6 @@ static void	replace_space(t_map *map)
 		}
 		i++;
 	}
-	print_map(map);
-	printf("dir: %c\n", map->dir);
 }
 
 static void	save_map_line(t_map *map, t_list *cur, int idx)
@@ -91,7 +88,5 @@ void	save_map(t_map *map)
 		cur = cur->next;
 	}
 	ft_lstclear(&(map->list), free_list_content);
-	print_map(map);
-	printf("\n\n");
 	replace_space(map);
 }

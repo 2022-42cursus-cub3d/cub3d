@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:32:09 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/26 21:02:46 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:29:14 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	main(int argc, char **argv)
 	save_map(&(info.map));
 	chk_valid_map(&info);
 	init_dir_vec(&info);
-	printf("pos x: %lf, pos y: %lf\n", info.vec.pos.x, info.vec.pos.y);
 	init_mlx(&info);
 	return (0);
 }
