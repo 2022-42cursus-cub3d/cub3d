@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:13:14 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 14:54:36 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/27 14:45:03 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static bool	chk_content(t_map *map, char *str)
 			|| 'E' == str[idx])
 		{
 			if (true == p_flag)
-				return (false);
+			{
+				ft_lstclear(&(map->list), free_list_content);
+				error("Player must be only one.", str);
+			}
 			map->dir = str[idx];
 			p_flag = true;
 		}
@@ -67,9 +70,22 @@ static bool	chk_map_line(t_map *map, char **line)
 	{
 		ft_lstclear(&(map->list), free_list_content);
 		error("The map must be composed of only 6 possible characters:\
-		0, 1 and N, S, E or W", *line);
+0, 1 and N, S, E or W", *line);
 	}
 	return (false);
+}
+
+static void	chk_first_line(char *line)
+{
+	int	idx;
+
+	idx = 0;
+	while (line[idx])
+	{
+		if ('1' != line[idx] && ' ' != line[idx])
+			error("The map must be closed.", line);
+		idx++;
+	}
 }
 
 void	save_map_to_list(t_map *map)
@@ -82,6 +98,7 @@ void	save_map_to_list(t_map *map)
 			break ;
 		free(line);
 	}
+	chk_first_line(line);
 	map->list = ft_lstnew(line);
 	while (get_next_line(map->fd, &line) > 0)
 	{
