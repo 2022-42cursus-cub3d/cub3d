@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 13:56:47 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 14:53:30 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/26 21:05:50 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	leaks(void)
 void	print_map(t_map *map)
 {
 	int	idx;
-	int j;
+	int	j;
 
 	idx = 0;
 	while (map->map[idx])
