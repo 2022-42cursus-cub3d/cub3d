@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:01:52 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/25 14:50:47 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/27 15:02:46 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	replace_space(t_map *map)
 		while (map->map[i][j])
 		{
 			if (' ' == map->map[i][j])
-				map->map[i][j] = 'b';
+				map->map[i][j] = BLANK;
 			j++;
 		}
 		i++;
@@ -61,11 +61,11 @@ static void	save_map_line(t_map *map, t_list *cur, int idx)
 		free_malloc(map->map, idx);
 		error(strerror(errno), 0);
 	}
-	ft_memset(map->map[idx], 'b', map->wid);
+	ft_memset(map->map[idx], BLANK, map->wid);
 	map->map[idx][map->wid] = 0;
 	cpy_num = ft_strlcpy(map->map[idx], (char *)cur->content, map->wid + 1);
 	if ((int)cpy_num < map->wid)
-		map->map[idx][cpy_num] = 'b';
+		map->map[idx][cpy_num] = BLANK;
 }
 
 void	save_map(t_map *map)

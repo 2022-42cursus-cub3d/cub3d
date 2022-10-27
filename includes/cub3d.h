@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:40:45 by hyojlee           #+#    #+#             */
-/*   Updated: 2022/10/26 12:36:46 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/27 15:02:04 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define KEY_D					2
 # define KEY_LEFT				123
 # define KEY_RIGHT				124
+
+# define BLANK					31
 
 # define NO						0
 # define SO						1
